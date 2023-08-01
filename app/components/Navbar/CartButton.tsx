@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, IconButton, Typography, Drawer } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 
 
 
@@ -16,15 +16,6 @@ type Anchor = 'left' | 'right';
 
 const CartButton = () => {
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const [cartDrawer, setCartDrawer] = useState({
     right: false
@@ -91,7 +82,7 @@ const CartButton = () => {
     {(['right'] as const).map((anchor)=>(
         <>
 
-            <Box key={anchor}>
+            <Box key={anchor + Math.random()}>
                 <IconButton onClick={toggleCartDrawer(anchor,true)}>
                     <AiOutlineShoppingCart size={40} color={'#000'}/>
                     <Typography sx={{fontSize:18,fontWeight:'bold', color:'#000'}}>({tempCartQuant})</Typography>

@@ -1,12 +1,14 @@
 
 'use client'
 
+import { useRouter } from "next/navigation"
 import { Box, IconButton, Typography } from "@mui/material"
 import Image from "next/image"
 import CartButton from "./CartButton"
 import ProfileButton from "./ProfileButton"
 import MobileMenuButton from "./MobileMenuButton"
 import SecondBUttonDrawer from "./SecondButtonDrawer"
+import { useState } from "react"
 
 
 const styles = {
@@ -24,14 +26,18 @@ const styles = {
 }
 
 
+
 const Navbar = () => {
+    
+    const router = useRouter()
+    const [hasLoggedIn, setHasLoggedIn] = useState(false)
 
   
     return (
         <Box sx={styles.container}>
 
             <Box sx={{display:'flex',flexDirection:{xs:'row',sm:undefined,md:'row'}, alignItems:'center'}}>
-                <IconButton>
+                <IconButton onClick={()=>router.push('/error')}>
                     <Image
                         src={'/images/nav3.png'}
                         alt="LogoNav"
@@ -82,7 +88,7 @@ const Navbar = () => {
 
             <Box sx={{display:{xs:'none',sm:'flex'}}}>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'1px', height:'100%', margin:'0 10px 0 10px'}}/>
-                <ProfileButton/>
+                <ProfileButton hasLoggedIn={hasLoggedIn}/>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'1px', height:'100%', margin:'0 10px 0 10px'}}/>
                 <CartButton/>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'1px', height:'100%', margin:'0 10px 0 10px'}}/>

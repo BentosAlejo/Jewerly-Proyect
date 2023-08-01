@@ -3,11 +3,21 @@
 import { useState } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material"
 import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai'
+import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
 
 
-const ProfileButton = () => {
+
+interface ProfileButtonProps {
+    hasLoggedIn: boolean
+}
+
+
+const ProfileButton:React.FC<ProfileButtonProps> = ({hasLoggedIn}) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [loginModal, setLoginModal] = useState(false);
+    const [registerModal, setRegisterModal] = useState(false)
 
     const open = Boolean(anchorEl);
 
@@ -39,10 +49,23 @@ const ProfileButton = () => {
             'aria-labelledby': 'basic-button',
             }}
         >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            {
+                hasLoggedIn ? (
+                    <Box>
+                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                        <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Box>
+                ) : (
+                    <Box>
+                        <MenuItem onClick={()=>setLoginModal(true)}>Ingresar</MenuItem>
+                        <MenuItem onClick={()=>setRegisterModal(true)}>Crear cuenta</MenuItem>
+                    </Box>
+                )
+            }
         </Menu>
+        <LoginModal open={loginModal} setOpen={setLoginModal}/>
+        <RegisterModal open={registerModal} setOpen={setRegisterModal}/>
     </Box>
     )
 
