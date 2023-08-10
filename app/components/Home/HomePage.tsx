@@ -1,8 +1,8 @@
 'use client'
 
-import HomeSlider from "../ui/HomeSlider"
-import HomeBanner from "../ui/HomeBanner"
-import HomeBottom from "../ui/HomeBottom"
+import HomeSlider from "./HomeSlider"
+import HomeBanner from "./HomeBanner"
+import HomeBottom from "./HomeBottom"
 
 
 const HomePage = () => {

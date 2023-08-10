@@ -83,11 +83,17 @@ const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
                     </Typography>
                 </IconButton>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'0.5px', height:'100%', margin:'0 10px 0 10px'}}/>
-                <Link href={'Contact'}>
+                {/* <Link href={'Contact'}>
                     <Typography sx={{fontSize:'15px', color:'#000'}}>
                         Contacto
                     </Typography>
-                </Link>
+                </Link> */}
+                  <IconButton>
+                    <Typography sx={{fontSize:'15px', color:'#000'}}>
+                        Contacto
+                    </Typography>
+                </IconButton>
+
                 <Box sx={{backgroundColor:'#cdcdcd', width:'0.5px', height:'100%', margin:'0 10px 0 10px'}}/>
                 <IconButton>
                     <Typography sx={{fontSize:'15px', color:'#000'}}>
