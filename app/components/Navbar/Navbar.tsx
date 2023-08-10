@@ -9,6 +9,13 @@ import ProfileButton from "./ProfileButton"
 import MobileMenuButton from "./MobileMenuButton"
 import SecondBUttonDrawer from "./SecondButtonDrawer"
 import { useState } from "react"
+import { SafeUser } from "@/app/types"
+import Link from "next/link"
+
+
+interface NavbarProps {
+    currentUser?: SafeUser | null
+}
 
 
 const styles = {
@@ -27,24 +34,31 @@ const styles = {
 
 
 
-const Navbar = () => {
+const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
     
     const router = useRouter()
     const [hasLoggedIn, setHasLoggedIn] = useState(false)
 
-  
+
+    
+
+    // if(currentUser !== null || currentUser){
+    //    console.log(currentUser)
+    // }
+
+    
     return (
         <Box sx={styles.container}>
 
             <Box sx={{display:'flex',flexDirection:{xs:'row',sm:undefined,md:'row'}, alignItems:'center'}}>
-                <IconButton onClick={()=>router.push('/error')}>
+                <Link href={'/'}>
                     <Image
                         src={'/images/nav3.png'}
                         alt="LogoNav"
                         width={74}
                         height={50}
                     />
-                </IconButton>
+                </Link>
                 <Typography sx={{display:{xs:'flex',sm:'none',md:'flex'}, fontWeight:'bold'}}>Jewerly Proyect</Typography>
                 <SecondBUttonDrawer/>
             </Box>
@@ -69,11 +83,11 @@ const Navbar = () => {
                     </Typography>
                 </IconButton>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'0.5px', height:'100%', margin:'0 10px 0 10px'}}/>
-                <IconButton>
+                <Link href={'Contact'}>
                     <Typography sx={{fontSize:'15px', color:'#000'}}>
                         Contacto
                     </Typography>
-                </IconButton>
+                </Link>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'0.5px', height:'100%', margin:'0 10px 0 10px'}}/>
                 <IconButton>
                     <Typography sx={{fontSize:'15px', color:'#000'}}>
@@ -88,7 +102,7 @@ const Navbar = () => {
 
             <Box sx={{display:{xs:'none',sm:'flex'}}}>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'1px', height:'100%', margin:'0 10px 0 10px'}}/>
-                <ProfileButton hasLoggedIn={hasLoggedIn}/>
+                <ProfileButton hasLoggedIn={hasLoggedIn} setHasLoggedIn={setHasLoggedIn}/>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'1px', height:'100%', margin:'0 10px 0 10px'}}/>
                 <CartButton/>
                 <Box sx={{backgroundColor:'#cdcdcd', width:'1px', height:'100%', margin:'0 10px 0 10px'}}/>

@@ -1,4 +1,4 @@
-
+'use client'
 
 import { useState } from "react";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, IconButton, Typography, Drawer } from "@mui/material";
@@ -20,6 +20,20 @@ const CartButton = () => {
   const [cartDrawer, setCartDrawer] = useState({
     right: false
   })
+
+
+  const generateKey = (arg1:any,arg2?:any) => {
+  
+    let key1 = `${Math.random()}-${arg1}`
+    let key2 = `${Math.random()}-${arg1}-${arg2}`
+  
+    if(arg2){
+      return key2
+    }else{
+      return key1
+    }
+  
+  }
 
 
   const toggleCartDrawer =
@@ -46,9 +60,9 @@ const CartButton = () => {
     onClick={toggleCartDrawer(anchor, false)}
     onKeyDown={toggleCartDrawer(anchor, false)}
   >
-    <List>
+     <List>
       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-        <ListItem key={text} disablePadding>
+        <ListItem key={generateKey(text,index)} disablePadding>
           <ListItemButton>
             <ListItemIcon>
               cart list
@@ -61,7 +75,7 @@ const CartButton = () => {
     <Divider />
     <List>
       {['All mail', 'Trash', 'Spam'].map((text, index) => (
-        <ListItem key={text} disablePadding>
+        <ListItem key={generateKey(Math.random(),index)} disablePadding>
           <ListItemButton>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -70,19 +84,20 @@ const CartButton = () => {
           </ListItemButton>
         </ListItem>
       ))}
-    </List>
+    </List> 
   </Box>
 )
+
 
 
   return (
 
 
     <Box sx={{display:'flex', alignContent:'center'}}>
-    {(['right'] as const).map((anchor)=>(
+    {(['right'] as const).map((anchor, index)=>(
         <>
 
-            <Box key={anchor + Math.random()}>
+            <Box key={generateKey(anchor, index)}>
                 <IconButton onClick={toggleCartDrawer(anchor,true)}>
                     <AiOutlineShoppingCart size={40} color={'#000'}/>
                     <Typography sx={{fontSize:18,fontWeight:'bold', color:'#000'}}>({tempCartQuant})</Typography>

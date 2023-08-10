@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-import Navbar from './components/Navbar/Navbar'
-import { Box, Typography, Slide } from '@mui/material'
+
+
+import { Box } from '@mui/material'
+import HomePage from './components/Home/HomePage'
 
 
 const main = {
@@ -15,16 +15,16 @@ const main = {
   
 }
 
+
 export default function Home() {
+
+
   return (
  
       <Box sx={main}>
-        <Box>
-          <Typography>Soy el home</Typography>
-        </Box>
-        <Box>
-          {/* <Slide children={'/images/images.png'}/> */}
-        </Box>
+        <HomePage/>
+
+
       </Box>
  
   )

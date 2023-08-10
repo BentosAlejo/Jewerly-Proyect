@@ -19,6 +19,7 @@ export async function POST(
             email,
             name,
             hashedPassword,
+            image:''
         }
     })
 

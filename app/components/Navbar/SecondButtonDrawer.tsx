@@ -42,7 +42,7 @@ const SecondBUttonDrawer = () => {
   >
     <List>
       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-        <ListItem key={text} disablePadding>
+        <ListItem key={text + index + '5'} disablePadding>
           <ListItemButton>
             <ListItemIcon>
               second button
@@ -55,7 +55,7 @@ const SecondBUttonDrawer = () => {
     <Divider />
     <List>
       {['All mail', 'Trash', 'Spam'].map((text, index) => (
-        <ListItem key={text} disablePadding>
+        <ListItem key={text + index} disablePadding>
           <ListItemButton>
             <ListItemIcon>
               second list

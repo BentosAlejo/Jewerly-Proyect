@@ -45,7 +45,7 @@ const MobileMenuButton = () => {
         >
           <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
+              <ListItem key={text + index + '03'} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     MobileMenu
@@ -58,7 +58,7 @@ const MobileMenuButton = () => {
           <Divider />
           <List>
             {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
+              <ListItem key={text + '1' + index} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                    list 1

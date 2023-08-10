@@ -5,15 +5,18 @@ import { Box, IconButton, Menu, MenuItem } from "@mui/material"
 import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai'
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
+import { signOut } from "next-auth/react";
+
 
 
 
 interface ProfileButtonProps {
     hasLoggedIn: boolean
+    setHasLoggedIn: (arg:boolean)=>void
 }
 
 
-const ProfileButton:React.FC<ProfileButtonProps> = ({hasLoggedIn}) => {
+const ProfileButton:React.FC<ProfileButtonProps> = ({hasLoggedIn, setHasLoggedIn}) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [loginModal, setLoginModal] = useState(false);
@@ -27,6 +30,9 @@ const ProfileButton:React.FC<ProfileButtonProps> = ({hasLoggedIn}) => {
       const handleClose = () => {
         setAnchorEl(null);
       };
+
+
+   
     
 
     return(
@@ -52,9 +58,9 @@ const ProfileButton:React.FC<ProfileButtonProps> = ({hasLoggedIn}) => {
             {
                 hasLoggedIn ? (
                     <Box>
-                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                        <MenuItem onClick={()=>{}}>Perfil</MenuItem>
                         <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={()=>signOut()}>Logout</MenuItem>
                     </Box>
                 ) : (
                     <Box>
@@ -64,8 +70,8 @@ const ProfileButton:React.FC<ProfileButtonProps> = ({hasLoggedIn}) => {
                 )
             }
         </Menu>
-        <LoginModal open={loginModal} setOpen={setLoginModal}/>
-        <RegisterModal open={registerModal} setOpen={setRegisterModal}/>
+        <LoginModal open={loginModal} setOpen={setLoginModal} handleCloseMenu={handleClose} hasLoggedIn={hasLoggedIn} setHasLoggedIn={setHasLoggedIn}/>
+        <RegisterModal open={registerModal} setOpen={setRegisterModal} handleCloseMenu={handleClose} hasLoggedIn={hasLoggedIn} setHasLoggedIn={setHasLoggedIn}/>
     </Box>
     )
 

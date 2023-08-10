@@ -5,14 +5,18 @@ import { useState } from 'react'
 import {FieldValues, SubmitHandler, useForm, UseFormRegister} from 'react-hook-form'
 import { Box, Modal, TextField, Typography, Button } from '@mui/material'
 import Input from './Input'
-import { toast } from 'react-hot-toast'
+import { toast, Toaster } from 'react-hot-toast'
 import {FcGoogle} from 'react-icons/fc'
+import { signIn } from 'next-auth/react'
 
 
 
 interface RegisterModalProps {
     open:boolean
     setOpen: (arg: boolean) => void
+    handleCloseMenu: (arg:boolean) => void
+    setHasLoggedIn:(arg:boolean)=>void
+    hasLoggedIn:boolean
 }
 
 const style = {
@@ -41,7 +45,7 @@ const style = {
   
 
 
-const RegisterModal:React.FC<RegisterModalProps> = ({open,setOpen}) => {
+const RegisterModal:React.FC<RegisterModalProps> = ({open,setOpen, handleCloseMenu, setHasLoggedIn, hasLoggedIn}) => {
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -58,7 +62,7 @@ const RegisterModal:React.FC<RegisterModalProps> = ({open,setOpen}) => {
         defaultValues:{
             name: '',
             email: '',
-            password: ''
+            password: '',
         }
         })
 
@@ -69,12 +73,15 @@ const RegisterModal:React.FC<RegisterModalProps> = ({open,setOpen}) => {
         axios.post('/api/register', data)
         .then(()=>{
             setOpen(false)
+            toast.success('Bienvenido/a!')
+            setHasLoggedIn(true)
         })
         .catch((error)=> {
             toast.error('Algo salio mal')
         })
         .finally(()=> {
             setIsLoading(false)
+            handleCloseMenu(false)
         })
     }
 
@@ -82,6 +89,24 @@ const RegisterModal:React.FC<RegisterModalProps> = ({open,setOpen}) => {
         setOpen(false)
     }
 
+   const signInRegisterWithGoogle = async() => {
+
+        await signIn('google')
+        .then(()=> {
+
+            
+            toast.success('Cuenta creada!')
+
+           
+        })
+        .finally(()=>{
+            setHasLoggedIn(true)
+        })
+      
+
+    }
+
+   
 
 
     return(
@@ -126,7 +151,7 @@ const RegisterModal:React.FC<RegisterModalProps> = ({open,setOpen}) => {
                 <Box sx={{marginTop:'20px', backgroundColor:'#000'}} component={'button'} onClick={onSubmit}>
                     <Typography sx={{color:'#fff', fontWeight:'bold'}}>Crear cuenta</Typography>
                 </Box>
-                <Box sx={{marginTop:'20px', backgroundColor:'#fff', display:'flex', flexDirection:'row', justifyContent:'center'}} component={'button'} onClick={()=>{}}>
+                <Box sx={{marginTop:'20px', backgroundColor:'#fff', display:'flex', flexDirection:'row', justifyContent:'center'}} component={'button'} onClick={()=>signInRegisterWithGoogle()}>
                     <FcGoogle style={{marginRight:'10px'}} size={24}/>
                     <Typography sx={{color:'#000', fontWeight:'bold'}}>Continuar con Google</Typography>
                 </Box>
