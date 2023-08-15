@@ -1,7 +1,6 @@
 
 
 import { Box } from '@mui/material'
-import HomePage from './components/Home/HomePage'
 import Contact from './components/Contact'
 
 
